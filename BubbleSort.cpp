@@ -22,11 +22,11 @@ void bubbleSort(int* vetor, int tamanho){
 
     while (houveTroca == true){
         houveTroca = false;
-        for (int i = 0; i < n-1; i++){
-            if (v[i] > v[i+1]){
-                aux = v[i];
-                v[i] = v[i+1];
-                v[i+1] = temporario;
+        for (int i = 0; i < tamanho - 1; i++){
+            if (vetor[i] > vetor[i+1]){
+                temporario = vetor[i];
+                vetor[i] = vetor[i+1];
+                vetor[i+1] = temporario;
                 houveTroca = true;
             }
         }
