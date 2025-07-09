@@ -1,34 +1,35 @@
 /*
-- Reordena diferentes pares de itens separados por um salto, que � calculado a cada passagem;
+- Inicialmente, define-se um gap (intervalo) igual ao tamanho da lista a ser ordenada;
 
-- Semelhante ao Bubble Sort;
+- Reordena pares de itens separados por um gap, que é reduzido a cada passagem;
 
-- Pior caso: O(n^2)
-- Melhor caso: O(nlog(n))
-- Mais eficaz em passagens anteriores do que durante o passo final, quando se assemelha ao Bubble Sort
-- Fator de encolhimento sugerido 1.3 para o intervalo;
-- Melhoria no Comb Sort 1.247330950103979;
+- O processo continua até que não haja mais trocas e o gap seja igual a 1;
+
+- Complexidade:
+  Melhor caso:   O(n log n)
+  Pior caso:     O(n²)
+
+- Mais eficaz nas primeiras passagens, quando o gap é grande;
+- No passo final, quando o gap é 1, se assemelha ao Bubble Sort;
+- Fator de redução (shrink factor) sugerido inicialmente: 1.3;
+- Melhoria atual: fator otimizado 1.247330950103979, que melhora a performance.
 */
 
-void combSort(int* v, int n){
+void combSort(int* vetor, int tamanho){ 
     bool houveTroca = true;
-    int aux, gap = n;
+    int gap = tamanho; 
 
-    while(houveTroca == true || gap > 1){
+    while (houveTroca || gap > 1){ 
         houveTroca = false;
-        gap = (int)(gap/1.247330950103979);
-        if(gap < 1){
+        gap = (int)(gap / 1.247330950103979);
+        if (gap < 1){ 
             gap = 1;
         }
-        int i = 0;
-        while(i+gap < n){
-            if(v[i] > v[i+gap]){
-                aux = v[i];
-                v[i] = v[i+gap];
-                v[i+gap] = aux;
+        for (int i = 0; i + gap < tamanho; i++){ 
+            if (vetor[i] > vetor[i+gap]){ 
+                swap(vetor[i], vetor[i+gap]);
                 houveTroca = true;
             }
-            i++;
         }
     }
 }
