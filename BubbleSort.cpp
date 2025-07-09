@@ -9,8 +9,8 @@
 
 - Complexidade:
   Melhor caso:   O(n)
-  Caso médio:    O(n^2)
-  Pior caso:     O(n^2)
+  Caso médio:    O(n²)
+  Pior caso:     O(n²)
 
 - Não recomendado para conjuntos de dados grandes;
 - Não recomendado para aplicações que exigem alta performance.
