@@ -3,33 +3,41 @@
 
 - O array é usado para contar quantas vezes cada valor aparece;
 
-- O valor a ser ordenado é tratado como um índice;
+- O valor a ser ordenado é tratado como índice no array auxiliar;
 
-- Percorre o array auxiliar verificadno quais valores existem e os coloca no array ordenado;
+- Após contar, percorre o array auxiliar verificando quais valores exitem e reescreve o vetor original em ordem crescente;
 
-- Pior caso: O(n+k)
-- Caso médio: O(n+k)
-- Melhor caso: O(n+k)
-- Ordena valores positivos (pode ser modificado para outros valores)
-- Estável
-- Processamento simples
-- Não recomendado para k muito grande
+- Complexidade:
+  Melhor caso:   O(n + k)
+  Caso médio:    O(n + k)
+  Pior caso:     O(n + k)
+
+- Funciona para valores inteiros não negativos (pode ser adaptado para negativos com transformações);
+- Eficiente e não baseado em comparações;
+- Requer espaço extra proporcional a k, o que pode ser problemático para k muito grande;
 */
 
-void countingSort(int* v, int n, int k){
-    int l = 0;
-    int* aux = new int[k+1];
-
-    for(int i=0; i<k+1; i++){
-        aux[i] = 0;
-    }
-    for(int i=0; i<n; i++){
-        aux[v[i]]++;
-    }
-    for(int i=0; i<k+1; i++){
-        for(int j=0; j<aux[i]; j++){
-            v[l++] = i;
+void countingSort(int* vetor, int tamanho){
+    int maiorValor = 0, k = 0;
+    
+    for(int i = 0; i < tamanho; i++){
+        if(vetor[i] > maiorValor){
+            maiorValor = vetor[i];
         }
     }
-    delete[] aux;
+    
+    int* vetorTemporario = new int[maiorValor+1];
+
+    for (int i = 0; i < maiorValor + 1; i++){
+        vetorTemporario[i] = 0;
+    }
+    for(int i = 0; i < tamanho; i++){
+        vetorTemporario[vetor[i]]++;
+    }
+    for(int i = 0; i < maiorValor + 1; i++){
+        for(int j = 0; j < vetorTemporario[i]; j++){
+            vetor[k++] = i;
+        }
+    }
+    delete[] vetorTemporario;
 }
