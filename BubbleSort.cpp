@@ -18,15 +18,12 @@
 
 void bubbleSort(int* vetor, int tamanho){
     bool houveTroca = true;
-    int temporario;
 
     while (houveTroca == true){
         houveTroca = false;
         for (int i = 0; i < tamanho - 1; i++){
             if (vetor[i] > vetor[i+1]){
-                temporario = vetor[i];
-                vetor[i] = vetor[i+1];
-                vetor[i+1] = temporario;
+                swap(vetor[i], vetor[i+1]);
                 houveTroca = true;
             }
         }
