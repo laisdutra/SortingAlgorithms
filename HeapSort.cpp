@@ -12,9 +12,10 @@
 - Repete esse processo até restar apenas um elemento não ordenado;
 
 - Complexidade:
-    Melhor caso:  O(n log n)
-    Caso médio:   O(n log n)
-    Pior caso:    O(n log n)
+  Melhor caso:  O(n log n)
+  Caso médio:   O(n log n)
+  Pior caso:    O(n log n)
+  
 - Tem desempenho em tempo de execução muito bom em conjuntos distribuídos aleatoriamente;
 - Tem uso de memória moderado;
 - O desempenho no pior cenário é praticamente igual ao no cenário médio; 
