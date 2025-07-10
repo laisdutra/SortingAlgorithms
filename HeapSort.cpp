@@ -1,53 +1,53 @@
 /*
-- Constrói um heap máximo;
+- Constrói um heap máximo (max-heap) a partir do vetor;
 
-- Troca a raiz com o elemento da última posição do vetor;
+- Coloca o maior valor na raiz (início do vetor);
 
-- Diminui o tamanho do heap em 1;
+- Troca a raiz com o último elemento da parte não ordenada do vetor;
 
-- Rearranja o heap máximo;
+- Reduz o tamanho do heap em 1;
 
-- Pior caso: O(nlog(n))
-- Caso médio: O(nlog(n))
-- Melhor caso: O(nlog(n))
-- Tem desempenho em tempo de execução muito bom em conjuntos ordenados aleatoriamente
-- Tem uso de memória moderado
-- O desempenho no pior cenário é praticamente igual ao no cenário médio 
-- Para n razoavelmente grande, o termo log(n) é quase constante, de modo que o tempo de ordenação é quase linear com o número de itens
-- O heapsort não é estável, porém é possível adaptar a estrutura a ser ordenada de modo que torne a ordenação estável
+- Rearranja o heap chamando heapify na raiz, garantindo que o próximo maior valor volte para o topo;
+
+- Repete esse processo até restar apenas um elemento não ordenado;
+
+- Complexidade:
+    Melhor caso:  O(n log n)
+    Caso médio:   O(n log n)
+    Pior caso:    O(n log n)
+- Tem desempenho em tempo de execução muito bom em conjuntos distribuídos aleatoriamente;
+- Tem uso de memória moderado;
+- O desempenho no pior cenário é praticamente igual ao no cenário médio; 
+- Para n razoavelmente grande, o termo log(n) é quase constante, fazendo o tempo se comportar quase linearmente em relação ao número de itens.
 */
 
-void heap(int* v, int n){
-    bool houveTroca = true;
-    int aux;
+void heapify(int* v, int n, int i) {
+    while (true) {
+        int maior = i;                 
+        int esquerda = 2*i + 1;        
+        int direita  = 2*i + 2;        
 
-    while(houveTroca == true){
-        houveTroca = false;
-        for(int i=0; i<n; i++){
-            if(2*i+1 < n && v[2*i+1] > v[i]){
-                aux = v[2*i+1];
-                v[2*i+1] = v[i];
-                v[i] = aux;
-                houveTroca = true;
-            }
-            if(2*i+2 < n && v[2*i+2] > v[i]){
-                aux = v[2*i+2];
-                v[2*i+2] = v[i];
-                v[i] = aux;
-                houveTroca = true;
-            }
+        if (esquerda < n && v[esquerda] > v[maior]){
+            maior = esquerda;
+        }
+        if (direita < n && v[direita] > v[maior]){
+            maior = direita;
+        }
+        if (maior != i) {
+            swap(v[i], v[maior]);
+            i = maior; 
+        } else {
+            break; 
         }
     }
 }
 
-void heapSort(int* v, int n){
-    int aux;
-
-    while(n > 1){
-        heap(v, n);
-        aux = v[0];
-        v[0] = v[n-1];
-        v[n-1] = aux;
-        n--;
+void heapSort(int* vetor, int tamanho) {
+    for (int i = tamanho / 2 - 1; i >= 0; i--) {
+        heapify(vetor, tamanho, i);
+    }
+    for (int i = tamanho - 1; i > 0; i--) {
+        swap(vetor[0], vetor[i]); 
+        heapify(vetor, i, 0); 
     }
 }
